@@ -136,9 +136,15 @@ class Lienzo(p:MainActivity): View(p){
         override fun onFinish() {
             start()
             if(contadorTimer>=60){
-                AlertDialog.Builder(p).setTitle("FELICIDADES")
-                    .setMessage("Obtuviste: $contadorM"+" pts")
-                    .setPositiveButton("Oki"){d,i->d.dismiss()}.show()
+                if(contadorM==80){
+                    AlertDialog.Builder(p).setTitle("FELICIDADES")
+                        .setMessage("Mataste a todas las moscas")
+                        .setPositiveButton("Oki"){d,i->d.dismiss()}.show()
+                }else{
+                    AlertDialog.Builder(p).setTitle("FELICIDADES")
+                        .setMessage("Obtuviste: $contadorM"+ "pts")
+                        .setPositiveButton("Oki"){d,i->d.dismiss()}.show()
+                }
             }
         }
 
@@ -256,7 +262,7 @@ class Lienzo(p:MainActivity): View(p){
         if(event.action == MotionEvent.ACTION_DOWN){
             xTouch = event.x
             yTouch = event.y
-            if(contadorTimer<60) {
+            if(contadorTimer<60 || contadorM==80) {
                 if (mos1.estaEnArea(event.x, event.y) == true) {
                     puntero = mos1
                     mos1.cambiarImagen(this, R.drawable.mancha)
